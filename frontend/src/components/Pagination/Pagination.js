@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 
 const Pagination = ({ pageNumber, info, updatePageNumber }) => {
   let pageChange = (data) => {
-    updatePageNumber(data.selected + 1);
+    updatePageNumber(data.selected);
   };
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -38,7 +38,7 @@ const Pagination = ({ pageNumber, info, updatePageNumber }) => {
       <ReactPaginate
         className="pagination justify-content-center my-4 gap-4"
         nextLabel="Next"
-        forcePage={pageNumber === 1 ? 0 : pageNumber - 1}
+        forcePage={pageNumber === 0 ? 0 : pageNumber - 1}
         previousLabel="Prev"
         previousClassName="btn btn-primary fs-5 prev"
         nextClassName="btn btn-primary fs-5 next"

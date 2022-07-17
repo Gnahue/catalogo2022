@@ -5,32 +5,32 @@ import CardDetails from "./CardDetails";
 
 const Card = ({ page, results }) => {
   let display;
-
+  console.log("TRAJO ESTO : " ,results)
   if (results) {
     display = results.map((x) => {
-      let { id, image, name, status, location } = x;
+      let { ID, CORTANTE_DESCRIPCION , MEDIDA, categoria} = x;
 
       return (
         <Link
           style={{ textDecoration: "none" }}
-          to={`${page}${id}`}
-          key={id}
+          to={`${page}${ID}`}
+          key={ID}
           className="col-lg-4 col-md-6 col-sm-6 col-12 mb-4 position-relative text-dark"
         >
           <div
             className={`${styles.card} d-flex flex-column justify-content-center`}
           >
-            <img className={`${styles.img} img-fluid`} src={image} alt="" />
+            <img className={`${styles.img} img-fluID`} src={`https://vicortantes.com.ar/stock/images/cortantes/${ID}.jpeg`} alt="" />
             <div className={`${styles.content}`}>
-              <div className="fs-5 fw-bold mb-4">{name}</div>
+              <div className="fs-5 fw-bold mb-4">{CORTANTE_DESCRIPCION}</div>
               <div className="">
-                <div className="fs-6 fw-normal">Last Location</div>
-                <div className="fs-5">{location.name}</div>
+                <div className="fs-6 fw-normal">{categoria}</div>
+                <div className="fs-5">{MEDIDA}</div>
               </div>
             </div>
           </div>
 
-          {(() => {
+          {/* {(() => {
             if (status === "Dead") {
               return (
                 <div
@@ -56,7 +56,7 @@ const Card = ({ page, results }) => {
                 </div>
               );
             }
-          })()}
+          })()} */}
         </Link>
       );
     });

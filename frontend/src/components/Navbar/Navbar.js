@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div className="container">
         <Link to="/" className="navbar-brand fs-3 ubuntu">
-          Rick & Morty <span className="text-primary">WiKi</span>
+          Vi Cortantes <span className="text-primary">Catálogo</span>
         </Link>
         <style jsx>{`
           button[aria-expanded="false"] > .close {
@@ -35,18 +35,12 @@ const Navbar = () => {
         >
           <div className="navbar-nav fs-5">
             <NavLink to="/" className="nav-link">
-              Characters
+              Todo
             </NavLink>
             <NavLink to="/episodes" className="nav-link">
-              Episode
+              Por categoría
             </NavLink>
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to="/location"
-            >
-              Location
-            </NavLink>
+            
           </div>
         </div>
       </div>

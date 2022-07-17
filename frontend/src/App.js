@@ -34,16 +34,18 @@ function App() {
 }
 
 const Home = () => {
-  let [pageNumber, updatePageNumber] = useState(1);
+  let [pageNumber, updatePageNumber] = useState(0);
   let [status, updateStatus] = useState("");
   let [gender, updateGender] = useState("");
   let [species, updateSpecies] = useState("");
   let [fetchedData, updateFetchedData] = useState([]);
   let [search, setSearch] = useState("");
   let { info, results } = fetchedData;
-
-  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
-
+  console.log(fetchedData)
+  //let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
+  let api = `https://vicortantes.com.ar/catalogo/backend/api.php?accion=GET_CORTANTES&page=${pageNumber}&limit=20&tipo=CC&busqueda=${search}`;
+    
+  console.log(api)
   useEffect(() => {
     (async function () {
       let data = await fetch(api).then((res) => res.json());
@@ -52,7 +54,7 @@ const Home = () => {
   }, [api]);
   return (
     <div className="App">
-      <h1 className="text-center mb-3">Characters</h1>
+      <h1 className="text-center mb-3">Todos nuestros productos</h1>
       <Search setSearch={setSearch} updatePageNumber={updatePageNumber} />
       <div className="container">
         <div className="row">

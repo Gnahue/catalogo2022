@@ -4,6 +4,7 @@ import styles from "./Search.module.scss";
 const Search = ({ setSearch, updatePageNumber }) => {
   let searchBtn = (e) => {
     e.preventDefault();
+    
   };
   return (
     <form
@@ -11,10 +12,10 @@ const Search = ({ setSearch, updatePageNumber }) => {
     >
       <input
         onChange={(e) => {
-          updatePageNumber(1);
+          updatePageNumber(0);
           setSearch(e.target.value);
         }}
-        placeholder="Search for characters"
+        placeholder="Buscá acá"
         className={styles.input}
         type="text"
       />
@@ -22,7 +23,7 @@ const Search = ({ setSearch, updatePageNumber }) => {
         onClick={searchBtn}
         className={`${styles.btn} btn btn-primary fs-5`}
       >
-        Search
+        Buscar
       </button>
     </form>
   );
