@@ -1,8 +1,8 @@
 import React from "react";
 import FilterBTN from "../FilterBTN";
 
-const Status = ({ updateStatus, updatePageNumber }) => {
-  let status = ["Cortante estandar", "Cortante chico", "Otro"];
+const Status = ({ tipos, updateStatus, updatePageNumber }) => {
+  
   return (
     <div className="accordion-item">
       <h2 className="accordion-header" id="headingOne">
@@ -24,14 +24,16 @@ const Status = ({ updateStatus, updatePageNumber }) => {
         data-bs-parent="#accordionExample"
       >
         <div className="accordion-body d-flex flex-wrap gap-3">
-          {status.map((item, index) => (
+          {tipos.map((item, index) => (
+           
             <FilterBTN
               key={index}
               index={index}
               name="status"
               task={updateStatus}
               updatePageNumber={updatePageNumber}
-              input={item}
+              input={item.DESCRIPCION}
+              value ={item.ID}
             />
           ))}
         </div>

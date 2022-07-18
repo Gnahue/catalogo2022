@@ -10,10 +10,12 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 function quitar_tildes($cadena)
 {
 	$no_permitidas = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "ñ", "À", "Ã", "Ì", "Ò", "Ù", "Ã™", "Ã ", "Ã¨", "Ã¬", "Ã²", "Ã¹", "ç", "Ç", "Ã¢", "ê", "Ã®", "Ã´", "Ã»", "Ã‚", "ÃŠ", "ÃŽ", "Ã”", "Ã›", "ü", "Ã¶", "Ã–", "Ã¯", "Ã¤", "«", "Ò", "Ã", "Ã„", "Ã‹");
-	$permitidas = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "n", "N", "A", "E", "I", "O", "U", "a", "e", "i", "o", "u", "c", "C", "a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "u", "o", "O", "i", "a", "e", "U", "I", "A", "E");
+	$permitidas = array("a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "Ã±", "N", "A", "E", "I", "O", "U", "a", "e", "i", "o", "u", "c", "C", "a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "u", "o", "O", "i", "a", "e", "U", "I", "A", "E");
 	$texto = str_replace($no_permitidas, $permitidas, $cadena);
+	echo $texto;
 	return $texto;
 }
+
 switch ($_REQUEST['accion']) {
 
 	case "GET_CORTANTES":
@@ -22,10 +24,15 @@ switch ($_REQUEST['accion']) {
 		$limitperpage =  $_REQUEST['limit'];
 		$desde = $page * $limitperpage;
 		$busqueda = $_REQUEST['busqueda'];
-
+		$tipo = $_REQUEST['tipo'];
 		$AltaF = new cnnMySql;
-		$AltaF->Procedimiento  = "apiGetCortantes";
-		$AltaF->parametros = array($desde, $limitperpage, quitar_tildes($busqueda));
+		if ($tipo === '') {
+			$AltaF->Procedimiento  = "apiGetCortantes";
+			$AltaF->parametros = array($desde, $limitperpage, quitar_tildes($busqueda));
+		} else {
+			$AltaF->Procedimiento  = "apiGetCortantesTipo";
+			$AltaF->parametros = array($desde, $limitperpage, quitar_tildes($busqueda), $tipo);
+		}
 		$AltaF->procesarPro();
 		$AltaF->datosObjeto = true;
 
@@ -34,12 +41,21 @@ switch ($_REQUEST['accion']) {
 
 		$result = $AltaF->registros;
 		$count = $result[0]['count_res'];
-		$pages = ceil ($count / $limitperpage);
+		$pages = ceil($count / $limitperpage);
 		$info = ['count' => $count, 'pages' => $pages];
 		$final = ['info' => $info, 'results' => $result];
 
 		// $res = array_push($final,$info);
 		// print_r($res);
 		print_r(json_encode($final));
+		break;
+
+	case "GET_TIPO":
+		$AltaF = new cnnMySql;
+		$AltaF->Procedimiento  = "apiGetTipos";
+		$AltaF->parametros = array();
+		$AltaF->procesarPro();
+		$AltaF->datosObjeto = true;
+		print_r(json_encode($AltaF->registros));
 		break;
 }

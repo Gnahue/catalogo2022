@@ -4,6 +4,7 @@ import Species from "./category/Species";
 import Status from "./category/Status";
 
 const Filter = ({
+  tipos,
   pageNumber,
   updatePageNumber,
   updateStatus,
@@ -14,7 +15,7 @@ const Filter = ({
     updateStatus("");
     updateGender("");
     updateSpecies("");
-    updatePageNumber(1);
+    updatePageNumber(0);
     window.location.reload(false);
   };
   return (
@@ -29,6 +30,7 @@ const Filter = ({
       </div>
       <div className="accordion" id="accordionExample">
         <Status
+          tipos = {tipos}
           updatePageNumber={updatePageNumber}
           updateStatus={updateStatus}
         />

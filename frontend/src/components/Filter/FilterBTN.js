@@ -1,6 +1,7 @@
 import React from "react";
 
-const FilterBTN = ({ input, task, updatePageNumber, index, name }) => {
+const FilterBTN = ({ input, task, updatePageNumber, index, name , value}) => {
+  console.log("VALOR : ",value)
   return (
     <div>
       <style jsx>
@@ -24,8 +25,8 @@ const FilterBTN = ({ input, task, updatePageNumber, index, name }) => {
         />
         <label
           onClick={(x) => {
-            task(input);
-            updatePageNumber(1);
+            task(value);
+            updatePageNumber(0);
           }}
           className="btn btn-outline-primary"
           for={`${name}-${index}`}

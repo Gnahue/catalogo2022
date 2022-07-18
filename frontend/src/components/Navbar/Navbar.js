@@ -37,7 +37,7 @@ const Navbar = () => {
             <NavLink to="/" className="nav-link">
               Todo
             </NavLink>
-            <NavLink to="/episodes" className="nav-link">
+            <NavLink to="/" className="nav-link">
               Por categoría
             </NavLink>
             

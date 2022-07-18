@@ -39,17 +39,22 @@ const Home = () => {
   let [gender, updateGender] = useState("");
   let [species, updateSpecies] = useState("");
   let [fetchedData, updateFetchedData] = useState([]);
+  let [fetchedTipos, updateFetchedTipos] = useState([]);
   let [search, setSearch] = useState("");
   let { info, results } = fetchedData;
   console.log(fetchedData)
   //let api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
-  let api = `https://vicortantes.com.ar/catalogo/backend/api.php?accion=GET_CORTANTES&page=${pageNumber}&limit=20&tipo=CC&busqueda=${search}`;
-    
+  let api = `https://vicortantes.com.ar/catalogo/backend/api.php?accion=GET_CORTANTES&page=${pageNumber}&limit=20&tipo=${status}&busqueda=${search}`;
+  let api_tipos = `https://vicortantes.com.ar/catalogo/backend/api.php?accion=GET_TIPO`
+
   console.log(api)
   useEffect(() => {
     (async function () {
       let data = await fetch(api).then((res) => res.json());
+      let tipos = await fetch(api_tipos).then((res) => res.json());
+      updateFetchedTipos(tipos)
       updateFetchedData(data);
+
     })();
   }, [api]);
   return (
@@ -59,6 +64,7 @@ const Home = () => {
       <div className="container">
         <div className="row">
           <Filter
+            tipos = {fetchedTipos}
             pageNumber={pageNumber}
             status={status}
             updateStatus={updateStatus}
